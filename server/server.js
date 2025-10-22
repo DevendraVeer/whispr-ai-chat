@@ -1,12 +1,3 @@
-app.use(cors({
-  origin: '*', // We'll update this after deploying frontend
-  credentials: true
-}));
-
-app.use(express.json());
-
-
-
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -17,11 +8,19 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  credentials: true
+}));
 app.use(express.json());
 
-// In-memory storage for conversations (we'll add MongoDB later)
+// In-memory storage for conversations
 let conversations = [];
+
+// Health check endpoint
+app.get('/', (req, res) => {
+  res.json({ message: 'Whispr API is running!' });
+});
 
 // Chat endpoint
 app.post('/api/chat', async (req, res) => {
