@@ -1,3 +1,12 @@
+app.use(cors({
+  origin: '*', // We'll update this after deploying frontend
+  credentials: true
+}));
+
+app.use(express.json());
+
+
+
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
